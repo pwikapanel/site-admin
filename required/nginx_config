@@ -1,0 +1,48 @@
+# nginx server block
+# ln -s /etc/nginx/sites-available/folder* /etc/nginx/sites-enabled
+
+server {
+    listen 80;
+
+    # must match domain name or IP address
+    # or else the default Nginx page will be shown
+    server_name url*;
+
+#   # site is asleep
+#   root /opt/sleeping/html;
+#   index index.html;
+
+    # directory of site's static elements
+    location /static/ {
+        root /home/folder*;
+    }
+
+    # pass all additional queries to our application
+    location / {
+
+        # parameters from /etc/nginx/uwsgi_params
+        include uwsgi_params;
+
+        # pass the traffic to the socket
+        # that the uWSGI server sets up
+        # SOCKETS MUST MATCH IN:
+        # /etc/uwsgi/sites/django_proj*.ini
+        uwsgi_pass unix:/run/uwsgi/django_proj*.sock;
+    }
+
+    access_log /opt/logs/folder*/nginx.access;
+    error_log /opt/logs/folder*/nginx.error error;
+
+    error_page 500 502 503 504 /custom_50x.html;
+    location = /custom_50x.html {
+        root /home/folder*/static/nginx;
+        internal;
+    }
+
+   location /nginx_status {
+        # see active visitor at /nginx_status
+        stub_status on;
+        access_log   off;
+        allow all;
+   }
+}

@@ -1,0 +1,36 @@
+11:12:11.359 VERBOSE BashExecuter.execute():79 - ♻️ BashExecuter 79: Process terminated with status: 0
+11:12:11.364 VERBOSE BashExecuter.execute():92 - ♻️⚠️ BashExecuter 92: end of termination observer
+11:12:11.369 VERBOSE BashExecuter.execute():99 - ♻️ BashExecuter 99: Process ending
+11:12:11.373 VERBOSE BashExecuter.execute():106 - ♻️ BashExecuter 106: successfully exiting from taskQueue?async
+11:12:16.141 VERBOSE BashExecuter.execute():53 - ♻️ BashExecuter 53: Process preparing: /Applications/Svija Sync 1.0.10 Beta.app/Contents/Resources/rsync, baseen@base.svija.site::baseen/SYNC/, 7Ucr10nn5zb5sKRG, success
+11:12:16.145 VERBOSE BashExecuter.execute():96 - ♻️ BashExecuter 96: Process starting
+11:12:16.555 VERBOSE BashExecuter.execute():74 - ♻️ BashExecuter 74: Process output: success
+11:12:16.560 VERBOSE BashExecuter.execute():79 - ♻️ BashExecuter 79: Process terminated with status: 0
+11:12:16.563 VERBOSE BashExecuter.execute():92 - ♻️⚠️ BashExecuter 92: end of termination observer
+11:12:16.567 VERBOSE BashExecuter.execute():99 - ♻️ BashExecuter 99: Process ending
+11:12:16.571 VERBOSE BashExecuter.execute():106 - ♻️ BashExecuter 106: successfully exiting from taskQueue?async
+11:12:19.280 VERBOSE BashExecuter.stop():35 - ♻️ BashExecuter 35: Current Process force terminating
+11:29:00.494 VERBOSE BashExecuter.execute():53 - ♻️ BashExecuter 53: Process preparing: /Applications/Svija Sync 1.0.10 Beta.app/Contents/Resources/rsync, SVIJA/System/Last Modified.txt, baseen@base.svija.site::baseen/SYNC/, 7Ucr10nn5zb5sKRG, success
+11:29:00.498 VERBOSE BashExecuter.execute():96 - ♻️ BashExecuter 96: Process starting
+11:29:00.506 VERBOSE BashExecuter.execute():74 - ♻️ BashExecuter 74: Process output: /Applications/Svija Sync 1.0.10 Beta.app/Contents/Resources/last-owner.sh: line 23: SVIJA/System/Last Modified.txt: No such file or directory
+11:29:00.510 VERBOSE BashExecuter.execute():79 - ♻️ BashExecuter 79: Process terminated with status: 0
+11:29:00.513 VERBOSE BashExecuter.execute():92 - ♻️⚠️ BashExecuter 92: end of termination observer
+11:29:00.516 VERBOSE BashExecuter.execute():99 - ♻️ BashExecuter 99: Process ending
+11:29:00.519 VERBOSE BashExecuter.execute():106 - ♻️ BashExecuter 106: successfully exiting from taskQueue?async
+11:29:01.051 VERBOSE BashExecuter.execute():87 - ♻️⚠️ BashExecuter 87: Success Check failed - /Applications/Svija Sync 1.0.10 Beta.app/Contents/Resources/last-owner.sh: line 23: SVIJA/System/Last Modified.txt: No such file or directory
+11:29:01.057 VERBOSE BashExecuter.execute():88 - ♻️⚠️ BashExecuter 88: info - name = NSTaskDidTerminateNotification, object = Optional(<NSConcreteTask: 0x600000815630>), userInfo = nil
+11:29:01.061 VERBOSE BashExecuter.execute():53 - ♻️ BashExecuter 53: Process preparing: /Applications/Svija Sync 1.0.10 Beta.app/Contents/Resources/rsync, baseen@base.svija.site::baseen/SYNC/, 7Ucr10nn5zb5sKRG, success
+11:29:01.064 VERBOSE BashExecuter.execute():96 - ♻️ BashExecuter 96: Process starting
+11:29:01.657 VERBOSE BashExecuter.execute():74 - ♻️ BashExecuter 74: Process output: success
+11:29:01.662 VERBOSE BashExecuter.execute():79 - ♻️ BashExecuter 79: Process terminated with status: 0
+11:29:01.666 VERBOSE BashExecuter.execute():92 - ♻️⚠️ BashExecuter 92: end of termination observer
+11:29:01.670 VERBOSE BashExecuter.execute():99 - ♻️ BashExecuter 99: Process ending
+11:29:01.673 VERBOSE BashExecuter.execute():106 - ♻️ BashExecuter 106: successfully exiting from taskQueue?async
+11:29:06.435 VERBOSE BashExecuter.execute():53 - ♻️ BashExecuter 53: Process preparing: /Applications/Svija Sync 1.0.10 Beta.app/Contents/Resources/rsync, baseen@base.svija.site::baseen/SYNC/, 7Ucr10nn5zb5sKRG, success
+11:29:06.450 VERBOSE BashExecuter.execute():96 - ♻️ BashExecuter 96: Process starting
+11:29:06.839 VERBOSE BashExecuter.execute():74 - ♻️ BashExecuter 74: Process output: success
+11:29:06.845 VERBOSE BashExecuter.execute():79 - ♻️ BashExecuter 79: Process terminated with status: 0
+11:29:06.849 VERBOSE BashExecuter.execute():92 - ♻️⚠️ BashExecuter 92: end of termination observer
+11:29:06.854 VERBOSE BashExecuter.execute():99 - ♻️ BashExecuter 99: Process ending
+11:29:06.858 VERBOSE BashExecuter.execute():106 - ♻️ BashExecuter 106: successfully exiting from taskQueue?async
+11:29:07.728 VERBOSE BashExecuter.stop():35 - ♻️ BashExecuter 35: Current Process force terminating
