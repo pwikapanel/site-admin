@@ -1,7 +1,7 @@
 
 <!-- vim: set foldmethod=marker fmr=###,--- :-->
 
-*Updated 26 September, 2025 · this repo contains sensitive information and must not be made public*
+*Updated 9 October, 2025 · this repo contains sensitive information and must not be made public*
 
 ![Svija: SVG-based websites built in Adobe Illustrator][logo]
 
