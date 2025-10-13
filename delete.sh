@@ -7,7 +7,7 @@
 # https://stackoverflow.com/questions/1508490/erase-the-current-printed-console-line
 # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
 
-  repo="/opt/site-mgmt"
+  repo="/opt/admin"
 
   bold=`echo $'\e[1m'`
 normal=`echo $'\e[0m'`

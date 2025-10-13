@@ -9,7 +9,7 @@
 # https://stackoverflow.com/questions/1508490/erase-the-current-printed-console-line
 # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
 
-  repo="/opt/site-mgmt"
+  repo="/opt/admin"
 
   bold=`echo $'\e[1m'`
 normal=`echo $'\e[0m'`
@@ -368,7 +368,7 @@ fi
 # FTP user permissions
 
 # can be consolidated
-# https://github.com/svijasvg/site-mgmt/blob/beta/ftp-users.md
+# https://github.com/svijasvg/admin/blob/beta/ftp-users.md
 
 # user_codes="$url\t\t\t$ubuntu_user\t$ubuntu_pw\t$cloud_user\t$cloud_pw\t$first_name\t$last_name\t$email"
 
