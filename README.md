@@ -153,7 +153,7 @@ On the destination server:
 cd /opt
 rm -rf admin
 # git clone ssh://git@github.com/svijasvg/admin.git
-git clone -b beta ssh://git@github.com/svijasvg/admin.git # beta branch
+git clone -b pwika ssh://git@github.com/svijasvg/admin.git # pwika branch
 rm -rf admin/base\ site                                   # if not needed
 chmod 777 admin/*.sh
 ```
