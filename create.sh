@@ -259,7 +259,7 @@ fi
   grep -rl 'folder\*'      . | xargs sed -i "s/folder\*/$folder/g"
   grep -rl 'time_zone\*'   . | xargs sed -i "s;time_zone\*;$time_zone;g"
 
-  # Svija Cloud
+  # Cloud
   grep -rl 'cloud_user\*'  . | xargs sed -i "s/cloud_user\*/$cloud_user/g"
   grep -rl 'cloud_pw\*'    . | xargs sed -i "s/cloud_pw\*/$cloud_pw/g"
   grep -rl 'first_name\*'  . | xargs sed -i "s/first_name\*/$first_name/g"
@@ -282,12 +282,12 @@ fi
   cp -r $sync_src "./SYNC"
   cp -r $sync_src "./RESET"
 
-  # fixes bug in Svija Sync, shouldn't be necessary
+  # fixes bug in Sync, shouldn't be necessary
   echo -n "Site Creator" > "SYNC/.last"
 
   # add URL.txt file
-  #kdir SYNC/SVIJA/System
-  echo -n "$url" > "SYNC/SVIJA/System/URL.txt"
+  #kdir SYNC/CONFIG/System
+  echo -n "$url" > "SYNC/CONFIG/System/URL.txt"
 
   printf "$erase_line  ├── SYNC folder copied"
 
@@ -402,7 +402,7 @@ fi
 
     rm cloud_updates.py
 
-    printf "\n$line_below  ├── Svija Cloud user created"
+    printf "\n$line_below  ├── Cloud user created"
   fi
 
 #———————————————————————————————————————— rsync dæmon
