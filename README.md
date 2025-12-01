@@ -518,6 +518,10 @@ List all groups:
 ```
 less /etc/group
 ```
+List all users:
+```
+cut -d: -f1 /etc/passwd
+```
 Get a users groups by typing:
 ```
 groups USERNAME
