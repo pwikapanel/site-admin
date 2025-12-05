@@ -287,7 +287,7 @@ fi
 
   # add URL.txt file
   #kdir SYNC/CONFIG/System
-  echo -n "$url" > "SYNC/CONFIG/System/URL.txt"
+  echo -n "$url" > "SYNC/SYSTEM/Synchronization/URL.txt"
 
   printf "$erase_line  ├── SYNC folder copied"
 
