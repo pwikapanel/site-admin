@@ -5,7 +5,7 @@
 
 ![Pwika: SVG-based websites built in Adobe Illustrator][logo]
 
-[logo]: http://files.pwika.com/github/readme-logo.png "Pwika: SVG-based websites built in Adobe Illustrator"
+[logo]: http://files.pwika.com/github/github_banner.png "Pwika: SVG-based websites built in Adobe Illustrator"
 
 # remember to remove beta from installer below when this becomes the main branch
 
