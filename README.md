@@ -105,7 +105,7 @@ The SYNC folders can have any name (folder names are specified in the `create.tx
 ssh-copy-id root@000.000.000.000 # IP address of source server
 ```
 ```
-rsync -vaPur --delete #sourceIP:/home/example/SYNC/ /opt/SYNC/
+rsync -vaPur --delete root@#sourceIP:/home/example/SYNC/ /opt/SYNC/
 ```
 Check if there is only one json file:
 ```
