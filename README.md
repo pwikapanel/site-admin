@@ -151,23 +151,22 @@ Use multiple lines in create.txt to create multiple sites at the same time.
 On the destination server:
 ```
 cd /opt
-rm -rf admin
-# git clone ssh://git@github.com/pwikapanel/admin.git
-git clone -b pwika ssh://git@github.com/pwikapanel/admin.git # pwika branch
-rm -rf admin/base\ site                                   # if not needed
-chmod 777 admin/*.sh
+rm -rf site-admin
+# git clone ssh://git@github.com/pwikapanel/site-admin.git
+git clone -b pwika ssh://git@github.com/pwikapanel/site-admin.git # pwika branch
+chmod 777 site-admin/*.sh
 ```
 ```
-source /opt/admin/create.sh
+source /opt/site-admin/create.sh
 ```
 If this will be done regularly, you can add a shortcut to `.bashrc`:
 ```
 # master branch
-alias create='cd /opt && rm -rf admin && git clone git@github.com:/pwikapanel/admin.git && source /opt/admin/create.sh'
+alias create='cd /opt && rm -rf site-admin && git clone git@github.com:/pwikapanel/site-admin.git && source /opt/site-admin/create.sh'
 ```
 ```
 # beta branch
-alias create='cd /opt && rm -rf admin && git clone -b beta git@github.com:/pwikapanel/admin.git && source /opt/admin/create.sh'
+alias create='cd /opt && rm -rf site-admin && git clone -b beta git@github.com:/pwikapanel/site-admin.git && source /opt/site-admin/create.sh'
 ```
 ----
 
@@ -183,7 +182,7 @@ alias create='cd /opt && rm -rf admin && git clone -b beta git@github.com:/pwika
 
 For `.bashrc`:
 ```
-alias ,bu='source /opt/admin/backup.sh'
+alias ,bu='source /opt/site-admin/backup.sh'
 ```
 
 If everything is up to date, you can just type:
@@ -191,15 +190,15 @@ If everything is up to date, you can just type:
 ,bu
 ```
 Note: this means:
-- recent version of admin repo
+- recent version of `site-admin` repo
 - /opt/version.txt is up to date
 
 If not:
 ```
 cd /opt
-rm -rf admin
-git clone ssh://git@github.com/pwikapanel/admin.git
-chmod 777 admin/*.sh
+rm -rf site-admin
+git clone ssh://git@github.com/pwikapanel/site-admin.git
+chmod 777 site-admin/*.sh
 vi version.txt
 ```
 ---
@@ -217,14 +216,14 @@ vi sitelist.txt
 2. Clone the git repository, and set date & version:
 ```
 cd /opt
-rm -rf admin
-git clone ssh://git@github.com/pwikapanel/admin.git
-chmod 777 admin/*.sh
-vi admin/backup.sh
+rm -rf site-admin
+git clone ssh://git@github.com/pwikapanel/site-admin.git
+chmod 777 site-admin/*.sh
+vi site-admin/backup.sh
 ```
 3. Run the script:
 ```
-source admin/backup.sh
+source site-admin/backup.sh
 ```
 ---
 
@@ -364,10 +363,10 @@ On the destination server:
 
 ```
 cd /opt
-rm -rf admin
-git clone -b beta ssh://git@github.com/pwikapanel/admin.git
-chmod 777 admin/*.sh
-source /opt/admin/delete.sh
+rm -rf site-admin
+git clone -b beta ssh://git@github.com/pwikapanel/site-admin.git
+chmod 777 site-admin/*.sh
+source /opt/site-admin/delete.sh
 ```
 
 ---
@@ -593,7 +592,7 @@ Each Pwika account uses several user IDs and passwords:
 
 In the beta branch:
 ```
-cd ~/Documents/admin
+cd ~/Documents/site-admin
 vi -O create.sh delete.sh
 ```
 In vim:
@@ -607,7 +606,7 @@ git commit -m "last commit before merge" -a && git push -u
 ---
 2. Merge to Master
 
-Check out the **destination branch** and merge ([list of commits](https://github.com/pwikapanel/admin/commits/beta)):
+Check out the **destination branch** and merge ([list of commits](https://github.com/pwikapanel/site-admin/commits/beta)):
 ```
 git checkout master
 git merge beta --no-ff
@@ -619,13 +618,13 @@ git push origin master
 ---
 3. Create A New Github Release
 
-On Github, create a [new release](https://github.com/pwikapanel/admin/releases) from the **master branch**.
+On Github, create a [new release](https://github.com/pwikapanel/site-admin/releases) from the **master branch**.
 
 - use the current version number for the tag (1.0.1)
 - choose target **Master**
 - use the month & year for the title (October 2021)
 - if there is more than one release in a month, append -1, -2 etc. to all releases for the month
-- use the [commit list](https://github.com/pwikapanel/admin/commits/master) for the description
+- use the [commit list](https://github.com/pwikapanel/site-admin/commits/master) for the description
 
 ---
 4. Check Out the Beta Branch
@@ -646,7 +645,7 @@ git push -u
 
 In same repository as this document:
 ```
-cd ~/Documents/admin
+cd ~/Documents/site-admin
 vi -O README.md create.sh delete.sh
 ```
 In vim:
