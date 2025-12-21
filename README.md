@@ -1,17 +1,26 @@
 
 <!-- vim: set foldmethod=marker fmr=###,--- :-->
 
-*Updated 24 September, 2025 · this repo contains sensitive information and must not be made public*
+*Updated 18 December, 2025 · this repo contains sensitive information and must not be made public*
 
-![Svija: SVG-based websites built in Adobe Illustrator][logo]
+![Pwika: SVG-based websites built in Adobe Illustrator][logo]
 
-[logo]: http://files.svija.love/github/readme-logo.png "Svija: SVG-based websites built in Adobe Illustrator"
+[logo]: http://files.pwika.com/github/github_banner.png "Pwika: SVG-based websites built in Adobe Illustrator"
 
 # remember to remove beta from installer below when this becomes the main branch
 
+
+On the destination server:
+```
+cd /opt
+rm -rf site-admin
+# git clone ssh://git@github.com/pwikapanel/site-admin.git
+git clone -b pwika ssh://git@github.com/pwikapanel/site-admin.git # pwika branch
+chmod 777 site-admin/*.sh
+```
 <details><summary>add in when done</summary><br>
 
-- dns-mgmt directory of this repo contains an Akamai token for Svija
+- dns-mgmt directory of this repo contains an Akamai token for Pwika
 - various files contain links to Google documents with passwords
 
     need uwsgi & rsyncd log rotation
@@ -25,7 +34,7 @@
 
 `delete.sh` threw an error:
 ```
-deleting deb2.svija.com
+deleting deb2.pwika.com
   └── site folder exists
 
 Removing group `deb2' ...
@@ -53,16 +62,16 @@ DETAIL:  owner of schema public
 * * * * *
 </details>
 
-### Svija Site Management
+### Pwika Site Management
 
 These files are used to create and manage accounts on a fresh server or existing server.
 
-See [github.com/svijasvg/server](https://github.com/svijasvg/server) for server configuration.
+See [github.com/pwikapanel/server](https://github.com/pwikapanel/server) for server configuration.
 
 Initial notes:
 - an [Akamai](https://cloud.linode.com) **Nanode** can handle up to **10 accounts**
-- Svija sites are created by duplicating an existing Svija site  
-  there is no such thing as a "blank" Svija site.
+- Pwika sites are created by duplicating an existing Pwika site  
+  there is no such thing as a "blank" Pwika site.
 
 ---
 
@@ -81,7 +90,7 @@ The SYNC folders can have any name (folder names are specified in the `create.tx
 * * *
 #### Preparing the source site `SYNC` folder
 
-- log in to server of an existing Svija site
+- log in to server of an existing Pwika site
 - navigate to `/home/example`
 - `workon djangoEnv`
 - `rm SYNC/*.json`
@@ -96,7 +105,7 @@ The SYNC folders can have any name (folder names are specified in the `create.tx
 ssh-copy-id root@000.000.000.000 # IP address of source server
 ```
 ```
-rsync -vaPur --delete #sourceIP:/home/example/SYNC/ /opt/SYNC/
+rsync -vaPur --delete root@#sourceIP:/home/example/SYNC/ /opt/SYNC/
 ```
 Check if there is only one json file:
 ```
@@ -107,12 +116,12 @@ vi -O /opt/SYNC*/*.json
 
 - create an `A record` for the new domain, pointing to the new server
 
-[tech.svija.com](https://tech.svija.com/reference/general/custom-domain)
+[tech.pwika.com](https://tech.pwika.com/reference/general/custom-domain)
 
 ----
 #### Make a "create.txt" file
 
-Create passwords [here](https://files.svija.com/passwords).
+Create passwords [here](https://files.pwika.com/passwords).
 
 ```
 cd /opt
@@ -124,8 +133,8 @@ Each line should be a **colon separated list** containing:
 3. home folder
 4. Linux username
 5. Linux password
-6. Svija Cloud username
-7. Svija Cloud password
+6. Pwika Cloud username
+7. Pwika Cloud password
 8. first name
 9. last name
 10. email address
@@ -137,7 +146,7 @@ For historical reasons, spaces 2 and 3 can be empty or `x`:
 
 For example:
 ```
-example.svija.site:SYNC:example:example:lkdjUkdUjfleIjd:example:lkdjUkdUjfleIjd:David:Crocky:davidc@gmail.com:Europe/Paris
+example.pwika.site:SYNC:example:example:lkdjUkdUjfleIjd:example:lkdjUkdUjfleIjd:David:Crocky:davidc@gmail.com:Europe/Paris
 ```
 There must not be any spaces — use a hyphen in a two-word name if necessary.
 
@@ -147,27 +156,17 @@ Use multiple lines in create.txt to create multiple sites at the same time.
 
 ---
 #### Clone this repo & run installation script
-
-On the destination server:
 ```
-cd /opt
-rm -rf site-mgmt
-# git clone ssh://git@github.com/svijasvg/site-mgmt.git
-git clone -b beta ssh://git@github.com/svijasvg/site-mgmt.git # beta branch
-rm -rf site-mgmt/base\ site                                   # if not needed
-chmod 777 site-mgmt/*.sh
-```
-```
-source /opt/site-mgmt/create.sh
+source /opt/site-admin/create.sh
 ```
 If this will be done regularly, you can add a shortcut to `.bashrc`:
 ```
 # master branch
-alias create='cd /opt && rm -rf site-mgmt && git clone git@github.com:/svijasvg/site-mgmt.git && source /opt/site-mgmt/create.sh'
+alias create='cd /opt && rm -rf site-admin && git clone git@github.com:/pwikapanel/site-admin.git && source /opt/site-admin/create.sh'
 ```
 ```
 # beta branch
-alias create='cd /opt && rm -rf site-mgmt && git clone -b beta git@github.com:/svijasvg/site-mgmt.git && source /opt/site-mgmt/create.sh'
+alias create='cd /opt && rm -rf site-admin && git clone -b beta git@github.com:/pwikapanel/site-admin.git && source /opt/site-admin/create.sh'
 ```
 ----
 
@@ -183,7 +182,7 @@ alias create='cd /opt && rm -rf site-mgmt && git clone -b beta git@github.com:/s
 
 For `.bashrc`:
 ```
-alias ,bu='source /opt/site-mgmt/backup.sh'
+alias ,bu='source /opt/site-admin/backup.sh'
 ```
 
 If everything is up to date, you can just type:
@@ -191,15 +190,15 @@ If everything is up to date, you can just type:
 ,bu
 ```
 Note: this means:
-- recent version of site-mgmt repo
+- recent version of `site-admin` repo
 - /opt/version.txt is up to date
 
 If not:
 ```
 cd /opt
-rm -rf site-mgmt
-git clone ssh://git@github.com/svijasvg/site-mgmt.git
-chmod 777 site-mgmt/*.sh
+rm -rf site-admin
+git clone ssh://git@github.com/pwikapanel/site-admin.git
+chmod 777 site-admin/*.sh
 vi version.txt
 ```
 ---
@@ -217,14 +216,14 @@ vi sitelist.txt
 2. Clone the git repository, and set date & version:
 ```
 cd /opt
-rm -rf site-mgmt
-git clone ssh://git@github.com/svijasvg/site-mgmt.git
-chmod 777 site-mgmt/*.sh
-vi site-mgmt/backup.sh
+rm -rf site-admin
+git clone ssh://git@github.com/pwikapanel/site-admin.git
+chmod 777 site-admin/*.sh
+vi site-admin/backup.sh
 ```
 3. Run the script:
 ```
-source site-mgmt/backup.sh
+source site-admin/backup.sh
 ```
 ---
 
@@ -280,7 +279,7 @@ Log in to the new server by copying the **SSH Access** from the Akamai page, the
 ----
 #### 2. Update the host names
 
-- add new DNS **A records** at Akamai · [linodes](https://cloud.linode.com/linodes) · [svija.love](https://cloud.linode.com/domains/1515277)
+- add new DNS **A records** at Akamai · [linodes](https://cloud.linode.com/linodes) · [pwika.com](https://cloud.linode.com/domains/1515277)
 - set server host names
 ```
 hostnamectl set-hostname #SUBDOMAIN
@@ -291,8 +290,8 @@ vi /etc/hosts
 ```
 This is the part to be modified:
 ```
-139.122.148.232                client04.svija.love client04
-2b01:7e01::f05c:91ff:fea1:0325 client04.svija.love client04
+139.122.148.232                client04.pwika.com client04
+2b01:7e01::f05c:91ff:fea1:0325 client04.pwika.com client04
 ```
 Reboot the server:
 ```
@@ -327,9 +326,9 @@ If the source image backup might be replaced, then this is a good time to make a
 
     delgroup shadow
 
-### Deleting Svija Websites
+### Deleting Pwika Websites
 
-[manual instructions](https://github.com/svijasvg/knowledge/blob/master/delete-user.md)
+[manual instructions](https://github.com/pwikapanel/knowledge/blob/master/delete-user.md)
 
 ---
 ### 1. Delete the DNS Records
@@ -364,16 +363,16 @@ On the destination server:
 
 ```
 cd /opt
-rm -rf site-mgmt
-git clone -b beta ssh://git@github.com/svijasvg/site-mgmt.git
-chmod 777 site-mgmt/*.sh
-source /opt/site-mgmt/delete.sh
+rm -rf site-admin
+git clone -b beta ssh://git@github.com/pwikapanel/site-admin.git
+chmod 777 site-admin/*.sh
+source /opt/site-admin/delete.sh
 ```
 
 ---
 ### 5. Update Spreadsheets
 
-Update the [client spreadsheet][cs] or [Svija spreadsheet][ss].
+Update the [client spreadsheet][cs] or [Pwika spreadsheet][ss].
 
 Use **cmd-shift-X** to strike-through deleted sights, and change the text color to the gray over the red square.
 
@@ -518,6 +517,10 @@ List all groups:
 ```
 less /etc/group
 ```
+List all users:
+```
+cut -d: -f1 /etc/passwd
+```
 Get a users groups by typing:
 ```
 groups USERNAME
@@ -561,7 +564,7 @@ Be careful when installing websites that use these characters in their passwords
 <details><summary>expand</summary>
 
 * * *
-Each Svija account uses several user IDs and passwords:
+Each Pwika account uses several user IDs and passwords:
 
 **web site url**: self-evident.
 
@@ -575,7 +578,7 @@ Each Svija account uses several user IDs and passwords:
 - user: Django project name + 'user'
 - database name: Django project name + 'db' 
 
-**Svija Cloud ID & password**: configured by creation script but not used by server
+**Pwika Cloud ID & password**: configured by creation script but not used by server
 
 ---
 </details>
@@ -589,7 +592,7 @@ Each Svija account uses several user IDs and passwords:
 
 In the beta branch:
 ```
-cd ~/Documents/site-mgmt
+cd ~/Documents/site-admin
 vi -O create.sh delete.sh
 ```
 In vim:
@@ -603,7 +606,7 @@ git commit -m "last commit before merge" -a && git push -u
 ---
 2. Merge to Master
 
-Check out the **destination branch** and merge ([list of commits](https://github.com/svijasvg/site-mgmt/commits/beta)):
+Check out the **destination branch** and merge ([list of commits](https://github.com/pwikapanel/site-admin/commits/beta)):
 ```
 git checkout master
 git merge beta --no-ff
@@ -615,13 +618,13 @@ git push origin master
 ---
 3. Create A New Github Release
 
-On Github, create a [new release](https://github.com/svijasvg/site-mgmt/releases) from the **master branch**.
+On Github, create a [new release](https://github.com/pwikapanel/site-admin/releases) from the **master branch**.
 
 - use the current version number for the tag (1.0.1)
 - choose target **Master**
 - use the month & year for the title (October 2021)
 - if there is more than one release in a month, append -1, -2 etc. to all releases for the month
-- use the [commit list](https://github.com/svijasvg/site-mgmt/commits/master) for the description
+- use the [commit list](https://github.com/pwikapanel/site-admin/commits/master) for the description
 
 ---
 4. Check Out the Beta Branch
@@ -642,7 +645,7 @@ git push -u
 
 In same repository as this document:
 ```
-cd ~/Documents/site-mgmt
+cd ~/Documents/site-admin
 vi -O README.md create.sh delete.sh
 ```
 In vim:

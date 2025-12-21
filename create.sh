@@ -9,7 +9,7 @@
 # https://stackoverflow.com/questions/1508490/erase-the-current-printed-console-line
 # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
 
-  repo="/opt/site-mgmt"
+  repo="/opt/site-admin"
 
   bold=`echo $'\e[1m'`
 normal=`echo $'\e[0m'`
@@ -259,7 +259,7 @@ fi
   grep -rl 'folder\*'      . | xargs sed -i "s/folder\*/$folder/g"
   grep -rl 'time_zone\*'   . | xargs sed -i "s;time_zone\*;$time_zone;g"
 
-  # Svija Cloud
+  # Cloud
   grep -rl 'cloud_user\*'  . | xargs sed -i "s/cloud_user\*/$cloud_user/g"
   grep -rl 'cloud_pw\*'    . | xargs sed -i "s/cloud_pw\*/$cloud_pw/g"
   grep -rl 'first_name\*'  . | xargs sed -i "s/first_name\*/$first_name/g"
@@ -282,12 +282,12 @@ fi
   cp -r $sync_src "./SYNC"
   cp -r $sync_src "./RESET"
 
-  # fixes bug in Svija Sync, shouldn't be necessary
+  # fixes bug in Sync, shouldn't be necessary
   echo -n "Site Creator" > "SYNC/.last"
 
   # add URL.txt file
-  #kdir SYNC/SVIJA/System
-  echo -n "$url" > "SYNC/SVIJA/System/URL.txt"
+  #kdir SYNC/CONFIG/System
+  echo -n "$url" > "SYNC/SYSTEM/Synchronization/URL.txt"
 
   printf "$erase_line  ├── SYNC folder copied"
 
@@ -368,7 +368,7 @@ fi
 # FTP user permissions
 
 # can be consolidated
-# https://github.com/svijasvg/site-mgmt/blob/beta/ftp-users.md
+# https://github.com/svijasvg/admin/blob/beta/ftp-users.md
 
 # user_codes="$url\t\t\t$ubuntu_user\t$ubuntu_pw\t$cloud_user\t$cloud_pw\t$first_name\t$last_name\t$email"
 
@@ -402,7 +402,7 @@ fi
 
     rm cloud_updates.py
 
-    printf "\n$line_below  ├── Svija Cloud user created"
+    printf "\n$line_below  ├── Cloud user created"
   fi
 
 #———————————————————————————————————————— rsync dæmon

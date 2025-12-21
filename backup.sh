@@ -14,7 +14,7 @@ source /opt/venv/djangoEnv/bin/activate
 
 #———————————————————————————————————————— text styles
 
-cd /opt/site-mgmt
+cd /opt/admin
 
   bold=`echo $'\e[1m'`
 normal=`echo $'\e[0m'`

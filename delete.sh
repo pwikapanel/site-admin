@@ -7,7 +7,7 @@
 # https://stackoverflow.com/questions/1508490/erase-the-current-printed-console-line
 # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
 
-  repo="/opt/site-mgmt"
+  repo="/opt/admin"
 
   bold=`echo $'\e[1m'`
 normal=`echo $'\e[0m'`
@@ -117,28 +117,21 @@ while IFS= read -r line; do
 ##
 #———————————————————————————————————————— delete user, group & folder
 
-  delgroup $user_name #√
-  printf "\n$scroll_line  ├── debian group $user_name deleted"
-
-  # from chatgpt
   # Kill all processes owned by the user
   pkill -u "$user_name"
-  
-  # Wait a moment to ensure they're gone
   sleep 1
-  
-  # Force kill if anything is still running
   if pgrep -u "$user_name" > /dev/null; then
       pkill -9 -u "$user_name"
   fi
   
-  # Now delete the user
-  deluser --remove-home "$user_name"
-
-  printf "\n$scroll_line  ┌── debian user $user_name deleted"
-
-  rm -rf $user_dir #√
-  printf "\n$scroll_line  ├── $user_dir deleted"
+  # Now delete the user (but DO NOT call delgroup first)
+  deluser --remove-home "$user_name"  # or: userdel --force --remove "$user_name"
+  
+  # Now delete the group (optional)
+  delgroup "$user_name"
+  
+  # Delete any leftover directory manually if needed
+  rm -rf "$user_dir"
 ##
 #———————————————————————————————————————— delete nginx configs
 
