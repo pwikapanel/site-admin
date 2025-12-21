@@ -9,6 +9,15 @@
 
 # remember to remove beta from installer below when this becomes the main branch
 
+
+On the destination server:
+```
+cd /opt
+rm -rf site-admin
+# git clone ssh://git@github.com/pwikapanel/site-admin.git
+git clone -b pwika ssh://git@github.com/pwikapanel/site-admin.git # pwika branch
+chmod 777 site-admin/*.sh
+```
 <details><summary>add in when done</summary><br>
 
 - dns-mgmt directory of this repo contains an Akamai token for Pwika
@@ -147,15 +156,6 @@ Use multiple lines in create.txt to create multiple sites at the same time.
 
 ---
 #### Clone this repo & run installation script
-
-On the destination server:
-```
-cd /opt
-rm -rf site-admin
-# git clone ssh://git@github.com/pwikapanel/site-admin.git
-git clone -b pwika ssh://git@github.com/pwikapanel/site-admin.git # pwika branch
-chmod 777 site-admin/*.sh
-```
 ```
 source /opt/site-admin/create.sh
 ```
