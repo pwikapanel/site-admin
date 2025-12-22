@@ -103,6 +103,7 @@ while IFS= read -r line; do
   user_name="${array[1]}"
   django_name="${array[2]}"
   user_dir="/home/$django_name"
+  user_name="${user_name//$'\r'/}" # remove \n added by vim
 
 	printf "\n$scroll_line  deleting $bold$url$normal"
 ##
@@ -116,8 +117,6 @@ while IFS= read -r line; do
   printf "\n  └── site folder exists\n\n"
 ##
 #———————————————————————————————————————— delete user, group & folder
-
-  printf "\n\n    killing processes owned by \"$user_name\"\n\n"
 
   # Kill all processes owned by the user
   pkill -u "$user_name"
