@@ -7,70 +7,11 @@
 
 [logo]: http://files.pwika.com/github/github_banner.png "Pwika: SVG-based websites built in Adobe Illustrator"
 
-### site-admin
-
-*A set of server-side tools for managing Pwika sites*
-
----
-### clone this repo
-
-On the destination server:
-```
-cd /opt
-rm -rf site-admin
-# git clone ssh://git@github.com/pwikapanel/site-admin.git
-git clone -b pwika ssh://git@github.com/pwikapanel/site-admin.git # pwika branch
-chmod 777 site-admin/*.sh
-```
-<details><summary>add in when done</summary><br>
-
-- dns-mgmt directory of this repo contains an Akamai token for Pwika
-- various files contain links to Google documents with passwords
-
-    need uwsgi & rsyncd log rotation
-
-    using different django ID & home folder needs testing
-
-- accents in names must be removed from create.txt
-- numbered subdomains require different home folder
-
-* * * * *
-
-`delete.sh` threw an error:
-```
-deleting deb2.pwika.com
-  └── site folder exists
-
-Removing group `deb2' ...
-Done.
-
-  ├── ubuntu group deb2 deleted
-
-Removing crontab ...
-Removing user `deb2' ...
-userdel: user deb2 is currently used by process 1044
-deluser: `/usr/sbin/userdel deb2' returned error code 8. Exiting.
-
-  ┌── ubuntu user deb2 deleted
-  ├── /home/deb2 deleted
-  ├── nginx configs deleted
-  ├── uwsgi config deleted
-  ├── certbot configs deleted
-  ├── rsyncd.scrt updated
-  └── rsyncd.conf updated
-
-DROP DATABASE
-psql:<stdin>:1: ERROR:  role "deb2user" cannot be dropped because some objects depend on it
-DETAIL:  owner of schema public
-```
-* * * * *
-</details>
-
 ### Pwika Site Management
 
 These files are used to create and manage accounts on a fresh server or existing server.
 
-See [github.com/pwikapanel/server](https://github.com/pwikapanel/server) for server configuration.
+See [github.com/pwikapanel/server-config](https://github.com/pwikapanel/server-config) for server configuration.
 
 Initial notes:
 - an [Akamai](https://cloud.linode.com) **Nanode** can handle up to **10 accounts**
@@ -78,10 +19,20 @@ Initial notes:
   there is no such thing as a "blank" Pwika site.
 
 ---
+### Clone this Repo
+
+On the destination server:
+```
+cd /opt
+rm -rf site-admin
+git clone ssh://git@github.com/pwikapanel/site-admin.git
+chmod 777 site-admin/*.sh
+```
+---
+
+<details><summary>Site Creation</summary>
 
 ### Site Creation
-
-<details><summary>expand</summary><br>
 
 More than one site can be created at one time.
 
@@ -175,14 +126,12 @@ alias create='cd /opt && rm -rf site-admin && git clone -b beta git@github.com:/
 ----
 
 ---
-</details>
 
-### backup.md
+</details><details><summary>Site Backup</summary>
 
-<details><summary>expand</summary>
+### Site Backup
 
-* * *
-### Backing Up Databases
+#### Backing Up Databases
 
 For `.bashrc`:
 ```
@@ -206,7 +155,7 @@ chmod 777 site-admin/*.sh
 vi version.txt
 ```
 ---
-### Previous Content
+#### Previous Content
 Note that this script only backs up active sites. Sleeping sites are not backed up (although it might be fine).
 
 1. Update `sitelist.txt` with project folders (not URL's):
@@ -232,11 +181,10 @@ source site-admin/backup.sh
 ---
 
 ---
-</details>
 
-### passwords.md
+</details><details><summary>Password Reset</summary>
 
-<details><summary>expand</summary>
+### Password Reset
 
 * * *
 ### Resetting A Password
@@ -265,11 +213,10 @@ workon djangoEnv
 ---
 
 ---
-</details>
 
-### cloning.md
+</details><details><summary>Cloning a Site</summary>
 
-<details><summary>expand</summary>
+### Cloning a Site
 
 * * *
 ### Starting from a Clone
@@ -319,11 +266,10 @@ If the source image backup might be replaced, then this is a good time to make a
 
 
 ---
-</details>
 
-### delete.md
+</details><details><summary>Deleting a Site</summary>
 
-<details><summary>expand</summary>
+### Deleting a Site
 
 * * *
 **NOTE**: it was necessary to delete the group "shadow" to reinstall it.
@@ -386,68 +332,10 @@ Use **cmd-shift-X** to strike-through deleted sights, and change the text color 
 
 
 ---
-</details>
 
-### FTP User Setup
-
-<details><summary>expand</summary>
-
-* * *
-FTP users need to be able to access their home directories, but shouldn't be able to see other users' content.
-
-The setup described below:
-- sets the users home directory to `/home/username`
-- allows them to *read* everything in that directory
-- allows them to modifiy everything in `/home/username/SYNC`
-
-[Source article](https://www.techrepublic.com/article/how-to-use-sftp-with-a-chroot-jail/)
-
-
-delete extra users & groups
-
-
----
-</details>
-
-### Server Configuration
-
-<details><summary>expand</summary>
-
-* * *
-Make `root` the owner of the home directory:
-```
-chown root /home
-```
-[reference](https://linux.die.net/man/5/sshd_config)
-
-Add the new group:
-```
-groupadd restricted
-```
-Update the SSHD config file:
-```
-vi /etc/ssh/sshd_config
-```
-Update line 115:
-```
-#Subsystem sftp /usr/lib/openssh/sftp-server
-Subsystem sftp internal-sftp
-```
-At the bottom, add:
-```
-Match Group restricted
-ChrootDirectory %h
-ForceCommand internal-sftp
-AllowTcpForwarding no
-X11Forwarding no
-```
-
----
-</details>
+</details><details><summary>Update an Existing User</summary>
 
 ### Update an Existing User
-
-<details><summary>expand</summary>
 
 * * *
 Create a password for each user:
@@ -477,11 +365,10 @@ systemctl restart sshd
 ```
 
 ---
-</details>
 
-### Create a New User:
+</details><details><summary>Create a New User</summary>
 
-<details><summary>expand</summary>
+### Create a New User
 
 * * *
 ```
@@ -510,11 +397,10 @@ Restart SSHD:
 systemctl restart sshd
 ```
 ---
-</details>
+
+</details><details><summary>Utilities</summary>
 
 ### Utilities
-
-<details><summary>expand</summary>
 
 * * *
 List all groups:
@@ -538,11 +424,10 @@ Delete a group:
 groupdel GROUPNAME
 ```
 ---
-</details>
+
+</details><details><summary>Password Issues</summary>
 
 ### Password Issues
-
-<details><summary>expand</summary>
 
 * * *
 The colon character is used by the Rsync user system to separate usernames and passwords.
@@ -561,11 +446,10 @@ Be careful when installing websites that use these characters in their passwords
 
 
 ---
-</details>
+
+</details><details><summary>User IDs & Passwords</summary>
 
 ### User IDs & Passwords
-
-<details><summary>expand</summary>
 
 * * *
 Each Pwika account uses several user IDs and passwords:
@@ -585,90 +469,6 @@ Each Pwika account uses several user IDs and passwords:
 **Pwika Cloud ID & password**: configured by creation script but not used by server
 
 ---
-</details>
 
-### Updating to a New Version
-
-<details><summary>expand</summary>
-
-* * *
-1. Change Branch Specifications & Commit
-
-In the beta branch:
-```
-cd ~/Documents/site-admin
-vi -O create.sh delete.sh
-```
-In vim:
-```
-:windo %s/-b beta/-b master/g
-```
-Commit:
-```
-git commit -m "last commit before merge" -a && git push -u
-```
----
-2. Merge to Master
-
-Check out the **destination branch** and merge ([list of commits](https://github.com/pwikapanel/site-admin/commits/beta)):
-```
-git checkout master
-git merge beta --no-ff
-```
-Push the new version:
-```
-git push origin master
-```
----
-3. Create A New Github Release
-
-On Github, create a [new release](https://github.com/pwikapanel/site-admin/releases) from the **master branch**.
-
-- use the current version number for the tag (1.0.1)
-- choose target **Master**
-- use the month & year for the title (October 2021)
-- if there is more than one release in a month, append -1, -2 etc. to all releases for the month
-- use the [commit list](https://github.com/pwikapanel/site-admin/commits/master) for the description
-
----
-4. Check Out the Beta Branch
-
-Commit any changes, then check out the beta branch:
-```
-git status
-git commit -m "last commit before going back to beta" -a
-```
-Commit any changes, then check out the beta branch:
-```
-git checkout beta 
-git merge master --no-ff -m "starting new version"
-git push -u
-```
----
-5. Update Branches & Increment the Version Number
-
-In same repository as this document:
-```
-cd ~/Documents/site-admin
-vi -O README.md create.sh delete.sh
-```
-In vim:
-```
-:windo %s/1.0.1/1.0.1/g
-```
-Then the branch specifications:
-```
-vi -O create.sh delete.sh
-```
-In vim:
-```
-:windo %s/-b master/-b beta/g
-```
-Commit the changes:
-```
-git commit -m "updated version number" -a && git push -u  
-```
-
----
 </details>
 
