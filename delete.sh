@@ -127,19 +127,22 @@ while IFS= read -r line; do
   
   # Now delete the user (but DO NOT call delgroup first)
   deluser --remove-home "$user_name"  # or: userdel --force --remove "$user_name"
+  printf "\n$scroll_line  ├── Debian user $suer_name deleted"
   
   # Now delete the group (optional)
   delgroup "$user_name"
+  printf "\n$scroll_line  ├── Debian group $user_name deleted"
   
   # Delete any leftover directory manually if needed
   rm -rf "$user_dir"
+  printf "\n$scroll_line  ├── /home/$user_dir deleted"
 ##
 #———————————————————————————————————————— delete nginx configs
 
   rm /etc/nginx/sites-available/$django_name #√
   rm /etc/nginx/sites-enabled/$django_name   #√
 
-  printf "\n$scroll_line  ├── nginx configs deleted"
+  printf "\n$scroll_line  ├── $django_name nginx configs deleted"
 ##
 #———————————————————————————————————————— delete uwsgi configs
 
