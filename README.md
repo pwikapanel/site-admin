@@ -7,8 +7,12 @@
 
 [logo]: http://files.pwika.com/github/github_banner.png "Pwika: SVG-based websites built in Adobe Illustrator"
 
-# remember to remove beta from installer below when this becomes the main branch
+### site-admin
 
+*A set of server-side tools for managing Pwika sites*
+
+---
+### clone this repo
 
 On the destination server:
 ```
