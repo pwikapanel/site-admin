@@ -179,7 +179,8 @@ while IFS= read -r line; do
 #   www.wellcom.svija.site x   wellcom ycF2A9Bn86HfpwkQ  wellcom ycF2A9Bn86HfpwkQ  Mamadou Diao  diao654@gmail.com Etc/GMT
 
 if [[ "$sync_src" == "/opt/x" || "$sync_src" == "/opt/" ]]; then
-  sync_src="/opt/SYNCFR"
+  printf "  SYNC source not defined — account creation canceled\n\n"
+  return 1
 fi
 
 if [[ $folder == "x" ]]; then

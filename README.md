@@ -64,7 +64,7 @@ rsync -vaPur --delete root@#sourceIP:/home/example/SYNC/ /opt/SYNC/
 ```
 Check if there is only one json file:
 ```
-vi -O /opt/SYNC*/*.json
+ls /opt/SYNC*/*.json
 ```
 ----
 #### DNS configuration
