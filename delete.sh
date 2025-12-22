@@ -117,6 +117,8 @@ while IFS= read -r line; do
 ##
 #———————————————————————————————————————— delete user, group & folder
 
+  printf "\n\n    killing processes owned by \"$user_name\"\n\n"
+
   # Kill all processes owned by the user
   pkill -u "$user_name"
   sleep 1
