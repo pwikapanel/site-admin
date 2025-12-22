@@ -135,7 +135,7 @@ alias create='cd /opt && rm -rf site-admin && git clone -b beta git@github.com:/
 
 This cannot be handled by a script.
 
-Configure the [DNS records][ld] at [Linode][lds]
+Delete the [`A` and `AAAA` DNS records][ld] at [Linode][lds]
 
 [ld]: https://cloud.linode.com/domains/
 [lds]: https://cloud.linode.com/linodes/
