@@ -103,7 +103,7 @@ password(){
   done
   echo $results
 }
-
+##
 #———————————————————————————————————————— split string on delimiter
 
 # https://stackoverflow.com/a/44153302/72958
@@ -119,32 +119,31 @@ split() {
     echo $part
   fi
 }
-
+##
 #———————————————————————————————————————— check if directory is missing
 
   dir_missing() { [[ ! -d $1 ]]; }
-  
+##
 #———————————————————————————————————————— check if directory exists
 
   dir_exists() { [[ -d $1 ]]; }
-  
+## 
 #———————————————————————————————————————— check if file is missing
 
 file_missing() { [[ ! -f $1 ]]; }
-
+##
 
 #:::::::::::::::::::::::::::::::::::::::: PROGRAM
 
 #———————————————————————————————————————— start venv
 
 source /opt/venv/djangoEnv/bin/activate
-
+##
 #———————————————————————————————————————— initialize results
 
 qty=0
-all_codes=""
 rm -rf /opt/errors.txt
-
+##
 
 #::::::::::::::::::::::::::::::::::::::::▼ begin loop
 
@@ -171,7 +170,7 @@ while IFS= read -r line; do
   time_zone="${array[10]}"
 
 	printf "\n$line_below  creating $bold$url$normal"
-
+##
 #———————————————————————————————————————— correct input if missing
 #
 #   because as of september 2023, the SYNC folder and home folder
@@ -190,13 +189,7 @@ fi
 if [ -z "${folder-unset}" ]; then
   folder="$ubuntu_user"
 fi
-
-#———————————————————————————————————————— keep codes for output when done
-
-  user_codes="$url\t\t\t$ubuntu_user\t$ubuntu_pw\t$cloud_user\t$cloud_pw\t$first_name\t$last_name\t$email"
-
-  all_codes="$all_codes\n$user_codes"
-
+##
 #———————————————————————————————————————— check for SYNC* & *.json
 
   if dir_missing $sync_src; then
@@ -210,7 +203,7 @@ fi
   fi
   
   printf "\n  ├── SYNC folder & JSON file exist"
-
+##
 #———————————————————————————————————————— check that folder doesn't exist
 
   folder_path="/home/$folder"
@@ -220,7 +213,7 @@ fi
     cd /opt
     return 1
   fi
-
+##
 #———————————————————————————————————————— start django project & cd
 
   django_proj="$folder"
@@ -231,13 +224,13 @@ fi
 
   django-admin startproject $django_proj $folder_path # need both because folder already exists
   printf "\n$line_below  ├── django project $django_proj started in $folder_path"
-
+##
 #———————————————————————————————————————— copy required files to the new directory
 
   cp -r $repo/required/* ./
 
   printf "\n$line_below  ├── required files copied"
-
+##
 #———————————————————————————————————————— update credentials in /required/*
 
   #   | takes output from left as input for right side
@@ -273,7 +266,7 @@ fi
 
 
   printf "\n$line_below  ├── required files updated"
-
+##
 #———————————————————————————————————————— copy SYNC folder
 
 # must be after sed so files don't get corrupted
@@ -290,7 +283,7 @@ fi
   echo -n "$url" > "SYNC/SYSTEM/Synchronization/URL.txt"
 
   printf "$erase_line  ├── SYNC folder copied"
-
+##
 #———————————————————————————————————————— cat urls.py settings.py 
 
   cat urls.py >> $django_proj/urls.py
@@ -300,14 +293,14 @@ fi
   rm settings.py
 
   printf "\n$line_below  ├── urls.py & settings.py updated"
-
+##
 #———————————————————————————————————————— create database
 
   sudo -u postgres psql -f postgres.sql >> /opt/errors.txt 2>&1
   rm postgres.sql
 
   printf "\n$line_below  ├── database created"
-
+##
 #———————————————————————————————————————— migrations
 
   printf "\n$line_below  ├── applying migrations · 8s..."
@@ -315,7 +308,7 @@ fi
   ./manage.py migrate --run-syncdb >> /opt/errors.txt 2>&1
 
   printf "$erase_line  ├── migrations applied"
-
+##
 #———————————————————————————————————————— contentTypes.py
 
   chmod 777 contentTypes.py
@@ -324,7 +317,7 @@ fi
   rm contentTypes.py
 
   printf "\n$line_below  ├── ContentTypes framework deleted"
-
+##
 #———————————————————————————————————————— load json
 
   printf "\n$line_below  ├── importing JSON data · 3s..."
@@ -333,7 +326,7 @@ fi
   rm -f SYNC/*.json
 
   printf "$erase_line  ├── JSON data imported"
-
+##
 #———————————————————————————————————————— collect static
 
   printf "\n$line_below  ├── collecting static files..."
@@ -341,7 +334,7 @@ fi
   ./manage.py collectstatic --noinput >> /opt/errors.txt 2>&1
 
   printf "$erase_line  ├── static files collected"
-
+##
 #———————————————————————————————————————— nginx config
 
   mv nginx_config /etc/nginx/sites-available/$folder
@@ -349,13 +342,13 @@ fi
   ln -s /etc/nginx/sites-available/$folder /etc/nginx/sites-enabled
 
   printf "\n$line_below  ├── nginx configured"
-
+##
 #———————————————————————————————————————— uwsgi config
 
   mv uwsgi_config.ini /etc/uwsgi/sites/$folder.ini
 # chown -R $ubuntu_user:$ubuntu_user SYNC   # superseded by FTP mods below
   printf "\n$line_below  ├── uwsgi configured"
-
+##
 #———————————————————————————————————————— create ubuntu user
 
 # useradd -d /home/$folder/SYNC $ubuntu_user
@@ -369,8 +362,6 @@ fi
 
 # can be consolidated
 # https://github.com/svijasvg/admin/blob/beta/ftp-users.md
-
-# user_codes="$url\t\t\t$ubuntu_user\t$ubuntu_pw\t$cloud_user\t$cloud_pw\t$first_name\t$last_name\t$email"
 
 # usermod -d /home/$folder $ubuntu_user
   usermod -s /bin/false $ubuntu_user
@@ -394,7 +385,7 @@ fi
   chown $django_proj:www-data /opt/logs/$folder
   chmod 755 /opt/logs/$folder                        # may not be necessary
   chown $django_proj:www-data /home/$folder/cache
-
+##
 #———————————————————————————————————————— django user account
 
   if [[ "$cloud_user" != "" ]]; then
@@ -404,7 +395,7 @@ fi
 
     printf "\n$line_below  ├── Cloud user created"
   fi
-
+##
 #———————————————————————————————————————— rsync dæmon
 
   cat rsyncd.conf >> /etc/rsyncd.conf
@@ -414,7 +405,7 @@ fi
   rm rsyncd.scrt
 
   printf "\n$line_below  ├── rsync dæmon configured"
-
+##
 #———————————————————————————————————————— enable certbot/https
 
   printf "\n$line_below  ├── enabling https · 10s..."
@@ -422,13 +413,13 @@ fi
   certbot --nginx -d "$url" &>> /opt/certbot.txt
 
   printf "$erase_line  ├── https enabled"
-
+##
 #———————————————————————————————————————— increment counter & notify of completion
 
   qty=$((qty + 1))
   printf "\n$line_below  $bold$url$normal created\n"
   cd /opt
-
+##
 
 #:::::::::::::::::::::::::::::::::::::::: ▲ end loop
 
@@ -439,7 +430,7 @@ done < /opt/create.txt
 deactivate
 cd /opt
 service rsync restart
-
+##
 #———————————————————————————————————————— notify user
 
 printf "\n  $bold""PROGRAM COMPLETE$normal & rsync restarted"
@@ -454,11 +445,6 @@ printf "\n\n$bold" && tail -n +1 /opt/certbot.txt
 
 rm /opt/certbot.txt
 printf "$normal"
-
-#———————————————————————————————————————— login codes COMMENTED OUT
-
-#rintf "\n  if each domain name shows $bold""Successfully received certificate$normal, you can safely"
-#rintf "\n$line_below  paste the following codes into $bold""columns F-M$normal of the $bold""login spreadsheets$normal:\n$bold$all_codes$normal\n"
-
+##
 
 #:::::::::::::::::::::::::::::::::::::::: fin
