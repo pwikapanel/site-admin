@@ -170,55 +170,16 @@ source /opt/site-admin/delete.sh
 
 ### Site Backup
 
-#### Backing Up Databases
+Verify that `/opt/version.txt`
 
-For `.bashrc`:
-```
-alias ,bu='source /opt/site-admin/backup.sh'
-```
-
-If everything is up to date, you can just type:
-```
-,bu
-```
-Note: this means:
-- recent version of `site-admin` repo
-- /opt/version.txt is up to date
-
-If not:
-```
-cd /opt
-rm -rf site-admin
-git clone ssh://git@github.com/pwikapanel/site-admin.git
-chmod 777 site-admin/*.sh
-vi version.txt
-```
----
-#### Previous Content
-Note that this script only backs up active sites. Sleeping sites are not backed up (although it might be fine).
-
-1. Update `sitelist.txt` with project folders (not URL's):
-```
-ls /home
-cd /opt
-```
-```
-vi sitelist.txt
-```
-2. Clone the git repository, and set date & version:
-```
-cd /opt
-rm -rf site-admin
-git clone ssh://git@github.com/pwikapanel/site-admin.git
-chmod 777 site-admin/*.sh
-vi site-admin/backup.sh
-```
-3. Run the script:
+Run the script:
 ```
 source site-admin/backup.sh
 ```
----
-
+Shortcut for `.bashrc`:
+```
+alias ,bu='source /opt/site-admin/backup.sh'
+```
 ---
 
 </details><details><summary>Password Reset</summary>
