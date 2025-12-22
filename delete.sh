@@ -103,7 +103,7 @@ while IFS= read -r line; do
   user_name="${array[1]}"
   django_name="${array[2]}"
   user_dir="/home/$django_name"
-  user_name="${user_name//$'\r'/}" # remove \n added by vim
+  user_name="${user_name%%[[:space:]]*}" # remove \n added by vim
 
 	printf "\n$scroll_line  deleting $bold$url$normal"
 ##
@@ -117,6 +117,9 @@ while IFS= read -r line; do
   printf "\n  └── site folder exists\n\n"
 ##
 #———————————————————————————————————————— delete user, group & folder
+
+# invalid characters in input string, see trace output for more details at /usr/share/perl5/Debian/AdduserCommon.pm line 143.
+# error before next printf
 
   # Kill all processes owned by the user
   pkill -u "$user_name"
