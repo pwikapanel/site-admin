@@ -131,11 +131,6 @@ alias create='cd /opt && rm -rf site-admin && git clone -b beta git@github.com:/
 
 ### Site Deletion 
 
-* * *
-**NOTE**: it was necessary to delete the group "shadow" to reinstall it.
-
-    delgroup shadow
-
 ### 1. Delete the DNS Records
 
 This cannot be handled by a script.
