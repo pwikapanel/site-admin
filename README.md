@@ -153,7 +153,7 @@ url:sync ID:home folder
 - the URL does *not* include `http://` or `https://`
 - use multiple lines for multiple sites
 
-This is a good time to make a backup of the server at [Linode][lds].
+This is a good time to make a backup of the server at [Linode][https://cloud.linode.com/linodes].
 
 ---
 ### 3. Delete the Accounts
