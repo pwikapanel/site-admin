@@ -184,21 +184,17 @@ alias ,bu='source /opt/site-admin/backup.sh'
 
 </details><details><summary>Password Reset</summary>
 
-### Password Reset
-
-* * *
 ### Resetting A Password
 
----
-### From the Support Account
+----
+#### Via Pwika Cloud
 
-The easiest way is to connect to the user's website using the `support` username:
 - navigate to Home › **Users**
 - click on the affected user's **username**
 - click on the (tiny) text "you can change the password using this form"
 
----
-### From the Command Line
+----
+#### From the Command Line
 
 1. log in to the user's server
 2. change to the user's home folder
@@ -210,61 +206,6 @@ workon djangoEnv
 ```
 ./manage.py changepassword #username
 ```
----
-
----
-
-</details><details><summary>Cloning a Site</summary>
-
-### Cloning a Site
-
-* * *
-### Starting from a Clone
-
-#### 1. Update the server label
-
-Log in to the new server by copying the **SSH Access** from the Akamai page, then edit lines 128 & 136 of .profile:
-```
-,pf # edit the profile
-```
-----
-#### 2. Update the host names
-
-- add new DNS **A records** at Akamai · [linodes](https://cloud.linode.com/linodes) · [pwika.com](https://cloud.linode.com/domains/1515277)
-- set server host names
-```
-hostnamectl set-hostname #SUBDOMAIN
-```
-Replace the source subdomain and IP addresses with the new subdomain:
-```
-vi /etc/hosts
-```
-This is the part to be modified:
-```
-139.122.148.232                client04.pwika.com client04
-2b01:7e01::f05c:91ff:fea1:0325 client04.pwika.com client04
-```
-Reboot the server:
-```
-reboot
-```
-When you see `Connection to 143.42.194.159 closed.`, copy the IP address then type:
-```
-ping #IP address
-```
-As long as you see **request timeout** the server has not completed rebooting.
-
-----
-
-### Server is Done
-
-The server is now ready to host new accounts.
-
-If the source image backup might be replaced, then this is a good time to make a backup called **source image** for the next server.
----
----
-
-
 ---
 
 </details><details><summary>Update an Existing User</summary>
@@ -297,14 +238,12 @@ Restart SSHD:
 ```
 systemctl restart sshd
 ```
-
 ---
 
 </details><details><summary>Create a New User</summary>
 
 ### Create a New User
 
-* * *
 ```
 useradd -g restricted -s /bin/false -m -d /home/USER USER
 passwd USER   # guizmo
@@ -336,7 +275,6 @@ systemctl restart sshd
 
 ### Utilities
 
-* * *
 List all groups:
 ```
 less /etc/group
@@ -363,7 +301,6 @@ groupdel GROUPNAME
 
 ### Password Issues
 
-* * *
 The colon character is used by the Rsync user system to separate usernames and passwords.
 
 Currently, a user-chosen password containing a colon **will not work**.
@@ -376,16 +313,14 @@ For now, we accept the following characters:
 
 Be careful when installing websites that use these characters in their passwords.
 
-**[MAKE BACKUPS](https://cloud.linode.com/linodes/27919822/backup)**
-
+**[MAKE BACKUPS](https://cloud.linode.com/linodes/)**
 
 ---
 
 </details><details><summary>User IDs & Passwords</summary>
 
-### User IDs & Passwords
+### User IDs & Passwords: Definitions
 
-* * *
 Each Pwika account uses several user IDs and passwords:
 
 **web site url**: self-evident.
