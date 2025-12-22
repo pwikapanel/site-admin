@@ -127,6 +127,72 @@ alias create='cd /opt && rm -rf site-admin && git clone -b beta git@github.com:/
 
 ---
 
+</details><details><summary>Deleting a Site</summary>
+
+### Deleting a Site
+
+* * *
+**NOTE**: it was necessary to delete the group "shadow" to reinstall it.
+
+    delgroup shadow
+
+### Deleting Pwika Websites
+
+[manual instructions](https://github.com/pwikapanel/knowledge/blob/master/delete-user.md)
+
+---
+### 1. Delete the DNS Records
+
+This cannot be handled by a script.
+
+Configure the [DNS records][ld] at [Linode][lds]
+
+[ld]: https://cloud.linode.com/domains/
+[lds]: https://cloud.linode.com/linodes/
+
+---
+### 2. Create a Delete List
+
+```
+cd /opt
+vi delete.txt
+```
+The format is:
+```
+i
+url:sync ID:home folder
+```
+- use multiple lines for multiple sites
+
+This is a good time to make a backup of the server at [Linode][lds].
+
+---
+### 3. Delete the Accounts
+
+On the destination server:
+
+```
+cd /opt
+rm -rf site-admin
+git clone -b beta ssh://git@github.com/pwikapanel/site-admin.git
+chmod 777 site-admin/*.sh
+source /opt/site-admin/delete.sh
+```
+
+---
+### 5. Update Spreadsheets
+
+Update the [client spreadsheet][cs] or [Pwika spreadsheet][ss].
+
+Use **cmd-shift-X** to strike-through deleted sights, and change the text color to the gray over the red square.
+
+[cs]: https://docs.google.com/spreadsheets/d/1yz3OETWWM-lpTyubIba8ptQf7MJV6ft38_yTNd0MGcg/edit#gid=1287837631
+[ss]: https://docs.google.com/spreadsheets/d/1kZYUpenHkvHLGCyQgu5RaOrrRiOUIHVx4bQcugrhJQI/edit#gid=0
+---
+
+
+---
+
 </details><details><summary>Site Backup</summary>
 
 ### Site Backup
@@ -262,72 +328,6 @@ The server is now ready to host new accounts.
 
 If the source image backup might be replaced, then this is a good time to make a backup called **source image** for the next server.
 ---
----
-
-
----
-
-</details><details><summary>Deleting a Site</summary>
-
-### Deleting a Site
-
-* * *
-**NOTE**: it was necessary to delete the group "shadow" to reinstall it.
-
-    delgroup shadow
-
-### Deleting Pwika Websites
-
-[manual instructions](https://github.com/pwikapanel/knowledge/blob/master/delete-user.md)
-
----
-### 1. Delete the DNS Records
-
-This cannot be handled by a script.
-
-Configure the [DNS records][ld] at [Linode][lds]
-
-[ld]: https://cloud.linode.com/domains/
-[lds]: https://cloud.linode.com/linodes/
-
----
-### 2. Create a Delete List
-
-```
-cd /opt
-vi delete.txt
-```
-The format is:
-```
-i
-url:sync ID:home folder
-```
-- use multiple lines for multiple sites
-
-This is a good time to make a backup of the server at [Linode][lds].
-
----
-### 3. Delete the Accounts
-
-On the destination server:
-
-```
-cd /opt
-rm -rf site-admin
-git clone -b beta ssh://git@github.com/pwikapanel/site-admin.git
-chmod 777 site-admin/*.sh
-source /opt/site-admin/delete.sh
-```
-
----
-### 5. Update Spreadsheets
-
-Update the [client spreadsheet][cs] or [Pwika spreadsheet][ss].
-
-Use **cmd-shift-X** to strike-through deleted sights, and change the text color to the gray over the red square.
-
-[cs]: https://docs.google.com/spreadsheets/d/1yz3OETWWM-lpTyubIba8ptQf7MJV6ft38_yTNd0MGcg/edit#gid=1287837631
-[ss]: https://docs.google.com/spreadsheets/d/1kZYUpenHkvHLGCyQgu5RaOrrRiOUIHVx4bQcugrhJQI/edit#gid=0
 ---
 
 
