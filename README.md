@@ -127,9 +127,9 @@ alias create='cd /opt && rm -rf site-admin && git clone -b beta git@github.com:/
 
 ---
 
-</details><details><summary>Deleting a Site</summary>
+</details><details><summary>Site Deletion</summary>
 
-### Deleting a Site
+### Site Deletion 
 
 * * *
 **NOTE**: it was necessary to delete the group "shadow" to reinstall it.
